@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { sheetsClient } from '@/lib/google/sheets-client';
+import { sheetsClient } from '../../../../src/lib/google/sheets-client';
 
 export async function GET() {
   try {
