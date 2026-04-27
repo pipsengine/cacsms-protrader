@@ -1,0 +1,3 @@
+# CODEOWNERS
+# Example: Require code review from core team for all changes
+*       @your-github-username
