@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
-import { sheetsClient } from '@/lib/google/sheets-client';
+import { sheetsClient } from '../../../../src/lib/google/sheets-client';
 
+export async function GET() {
   try {
     // Read all rows from the 'Candle_Anomalies' sheet
     const rows = await sheetsClient.getRange('Candle_Anomalies!A2:Z');
