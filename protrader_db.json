@@ -1,0 +1,1681 @@
+{
+  "system_doctrines": [
+    {
+      "id": 1,
+      "doctrine_key": "CAPITAL_PRESERVATION",
+      "doctrine_name": "Capital Preservation Doctrine",
+      "description": "Capital protection is more important than trade frequency.",
+      "is_active": 1,
+      "created_at": "2026-04-27T12:36:47.913Z",
+      "updated_at": "2026-04-27T12:36:47.913Z"
+    },
+    {
+      "id": 2,
+      "doctrine_key": "STRATEGY_INDEPENDENCE",
+      "doctrine_name": "Strategy Independence Doctrine",
+      "description": "Strategies operate independently under shared parameters without inter-dependencies.",
+      "is_active": 1,
+      "created_at": "2026-04-27T12:36:47.913Z",
+      "updated_at": "2026-04-27T12:36:47.913Z"
+    },
+    {
+      "id": 3,
+      "doctrine_key": "SHARED_DATA_LAYER",
+      "doctrine_name": "Shared Data Doctrine",
+      "description": "All strategies draw from a single shared market data, session, and news abstraction layer.",
+      "is_active": 1,
+      "created_at": "2026-04-27T12:36:47.913Z",
+      "updated_at": "2026-04-27T12:36:47.913Z"
+    },
+    {
+      "id": 4,
+      "doctrine_key": "NO_FORCED_TRADING",
+      "doctrine_name": "No-Forced-Trade Doctrine",
+      "description": "The system must not force trades. Target is 2-5 quality opportunities per day.",
+      "is_active": 1,
+      "created_at": "2026-04-27T12:36:47.913Z",
+      "updated_at": "2026-04-27T12:36:47.913Z"
+    },
+    {
+      "id": 5,
+      "doctrine_key": "CONSERVATIVE_GROWTH",
+      "doctrine_name": "Conservative Growth Doctrine",
+      "description": "Strict lock on lot scaling until significant (100%) account growth is achieved.",
+      "is_active": 1,
+      "created_at": "2026-04-27T12:36:47.913Z",
+      "updated_at": "2026-04-27T12:36:47.913Z"
+    },
+    {
+      "id": 6,
+      "doctrine_key": "MULTI_CURRENCY_READINESS",
+      "doctrine_name": "Multi-Currency Readiness Doctrine",
+      "description": "Framework built to evaluate cross-pair correlations and exposure limits.",
+      "is_active": 1,
+      "created_at": "2026-04-27T12:36:47.913Z",
+      "updated_at": "2026-04-27T12:36:47.913Z"
+    },
+    {
+      "id": 7,
+      "doctrine_key": "HUMAN_LIKE_DISCIPLINE",
+      "doctrine_name": "Human-Like Trading Discipline Doctrine",
+      "description": "Avoid revenge trading, unclear markets, overtrading, and unsafe periods.",
+      "is_active": 1,
+      "created_at": "2026-04-27T12:36:47.913Z",
+      "updated_at": "2026-04-27T12:36:47.913Z"
+    },
+    {
+      "id": 8,
+      "doctrine_key": "RISK_FIRST_EXECUTION",
+      "doctrine_name": "Risk-First Execution Doctrine",
+      "description": "Calculate exit risk boundaries before any entry logic fires.",
+      "is_active": 1,
+      "created_at": "2026-04-27T12:36:47.913Z",
+      "updated_at": "2026-04-27T12:36:47.913Z"
+    },
+    {
+      "id": 9,
+      "doctrine_key": "AUDITABILITY",
+      "doctrine_name": "Auditability Doctrine",
+      "description": "All critical rule changes must be structurally audit-logged with explanation and attribution.",
+      "is_active": 1,
+      "created_at": "2026-04-27T12:36:47.913Z",
+      "updated_at": "2026-04-27T12:36:47.913Z"
+    },
+    {
+      "id": 10,
+      "doctrine_key": "NO_DIRECT_EXECUTION",
+      "doctrine_name": "No-Direct-Execution Doctrine",
+      "description": "Strategy engines only generate signal intelligence; execution is governed centrally.",
+      "is_active": 1,
+      "created_at": "2026-04-27T12:36:47.913Z",
+      "updated_at": "2026-04-27T12:36:47.913Z"
+    }
+  ],
+  "system_operating_rules": [
+    {
+      "id": 1,
+      "rule_key": "MAX_CONCURRENT_POSITIONS",
+      "rule_name": "Maximum Concurrent Positions",
+      "rule_value": "10",
+      "rule_type": "integer",
+      "description": "Limit across all strategies, symbols, and standard accounts.",
+      "is_enforced": 1,
+      "created_at": "2026-04-27T12:36:47.913Z",
+      "updated_at": "2026-04-27T12:36:47.913Z"
+    },
+    {
+      "id": 2,
+      "rule_key": "INITIAL_LOT_SIZE",
+      "rule_name": "Initial Lot Size",
+      "rule_value": "0.01",
+      "rule_type": "float",
+      "description": "Base fixed lot size applied to all initial setups.",
+      "is_enforced": 1,
+      "created_at": "2026-04-27T12:36:47.913Z",
+      "updated_at": "2026-04-27T12:36:47.913Z"
+    },
+    {
+      "id": 3,
+      "rule_key": "DYNAMIC_LOT_UNLOCK_GROWTH_PERCENT",
+      "rule_name": "Dynamic Lot Unlock Threshold (%)",
+      "rule_value": "100",
+      "rule_type": "integer",
+      "description": "Minimum account growth % required to unlock dynamic position sizing (e.g. 200% of initial capital).",
+      "is_enforced": 1,
+      "created_at": "2026-04-27T12:36:47.913Z",
+      "updated_at": "2026-04-27T12:36:47.913Z"
+    },
+    {
+      "id": 4,
+      "rule_key": "DAILY_QUALITY_TRADE_TARGET",
+      "rule_name": "Daily Target Opportunities",
+      "rule_value": "2-5",
+      "rule_type": "string",
+      "description": "Acceptable range for quality trade opportunities per day.",
+      "is_enforced": 1,
+      "created_at": "2026-04-27T12:36:47.913Z",
+      "updated_at": "2026-04-27T12:36:47.913Z"
+    },
+    {
+      "id": 5,
+      "rule_key": "FORCED_TRADING_ENABLED",
+      "rule_name": "Forced Trading",
+      "rule_value": "false",
+      "rule_type": "boolean",
+      "description": "If true, overrides trade restraint mechanisms. Should remain strictly false.",
+      "is_enforced": 1,
+      "created_at": "2026-04-27T12:36:47.913Z",
+      "updated_at": "2026-04-27T12:36:47.913Z"
+    },
+    {
+      "id": 6,
+      "rule_key": "NO_TRADE_STATES",
+      "rule_name": "Valid No-Trade States",
+      "rule_value": "[\"NO_TRADE_CONDITIONS_NOT_MET\", \"NO_TRADE_MARKET_UNCLEAR\", \"NO_TRADE_RISK_INVALID\", \"NO_TRADE_NEWS_BLOCK\", \"NO_TRADE_SPREAD_UNSAFE\", \"NO_TRADE_STRATEGY_CONFLICT\", \"NO_TRADE_DATA_UNSAFE\"]",
+      "rule_type": "json",
+      "description": "Approved statuses when the system abstains from trading.",
+      "is_enforced": 1,
+      "created_at": "2026-04-27T12:36:47.913Z",
+      "updated_at": "2026-04-27T12:36:47.913Z"
+    },
+    {
+      "id": 7,
+      "rule_key": "INDEPENDENT_STRATEGIES",
+      "rule_name": "Active Engines",
+      "rule_value": "[\"LIQUIDITY_ENGINE\", \"CHANNEL_ENGINE\"]",
+      "rule_type": "json",
+      "description": "List of currently active independent strategy engines.",
+      "is_enforced": 1,
+      "created_at": "2026-04-27T12:36:47.913Z",
+      "updated_at": "2026-04-27T12:36:47.913Z"
+    }
+  ],
+  "audit_logs": [],
+  "system_services": [
+    {
+      "id": 1,
+      "service_key": "API_GATEWAY",
+      "service_name": "API Gateway",
+      "description": "Main entry point for all frontend requests",
+      "status": "ACTIVE",
+      "health_status": "HEALTHY",
+      "created_at": "2026-04-27T12:36:47.913Z",
+      "updated_at": "2026-04-27T12:36:47.913Z"
+    },
+    {
+      "id": 2,
+      "service_key": "MARKET_DATA_SERVICE",
+      "service_name": "Shared Market Data Service",
+      "description": "Centralized source of truth for validated market quotes and candles",
+      "status": "ACTIVE",
+      "health_status": "HEALTHY",
+      "created_at": "2026-04-27T12:36:47.913Z",
+      "updated_at": "2026-04-27T12:36:47.913Z"
+    },
+    {
+      "id": 3,
+      "service_key": "LIQUIDITY_STRATEGY",
+      "service_name": "Liquidity Strategy Engine",
+      "description": "Generates setups based on liquidity sweeps and structural shifts",
+      "status": "ACTIVE",
+      "health_status": "HEALTHY",
+      "created_at": "2026-04-27T12:36:47.913Z",
+      "updated_at": "2026-04-27T12:36:47.913Z"
+    },
+    {
+      "id": 4,
+      "service_key": "CHANNEL_STRATEGY",
+      "service_name": "Channel Strategy Engine",
+      "description": "Generates setups based on channel bounds and trends",
+      "status": "ACTIVE",
+      "health_status": "HEALTHY",
+      "created_at": "2026-04-27T12:36:47.913Z",
+      "updated_at": "2026-04-27T12:36:47.913Z"
+    },
+    {
+      "id": 5,
+      "service_key": "RISK_SERVICE",
+      "service_name": "Centralized Risk Service",
+      "description": "Validates all proposed setups against global risk doctrines",
+      "status": "ACTIVE",
+      "health_status": "HEALTHY",
+      "created_at": "2026-04-27T12:36:47.913Z",
+      "updated_at": "2026-04-27T12:36:47.913Z"
+    },
+    {
+      "id": 6,
+      "service_key": "EXECUTION_GOVERNANCE",
+      "service_name": "Execution Governance",
+      "description": "Final gatekeeper before trades are dispatched to the broker bridge",
+      "status": "ACTIVE",
+      "health_status": "HEALTHY",
+      "created_at": "2026-04-27T12:36:47.913Z",
+      "updated_at": "2026-04-27T12:36:47.913Z"
+    },
+    {
+      "id": 7,
+      "service_key": "MT5_BRIDGE",
+      "service_name": "MT5 Connector Bridge",
+      "description": "Translates approved orders into MT5 execution calls",
+      "status": "ACTIVE",
+      "health_status": "HEALTHY",
+      "created_at": "2026-04-27T12:36:47.913Z",
+      "updated_at": "2026-04-27T12:36:47.913Z"
+    }
+  ],
+  "system_events": [],
+  "service_health_snapshots": [],
+  "system_environments": [
+    {
+      "id": 1,
+      "environment_key": "DEVELOPMENT",
+      "environment_name": "Development",
+      "description": "Local developer testing",
+      "is_active": 1,
+      "created_at": "2026-04-27T12:36:47.913Z",
+      "updated_at": "2026-04-27T12:36:47.913Z"
+    },
+    {
+      "id": 2,
+      "environment_key": "STAGING",
+      "environment_name": "Staging",
+      "description": "Pre-production validation",
+      "is_active": 1,
+      "created_at": "2026-04-27T12:36:47.913Z",
+      "updated_at": "2026-04-27T12:36:47.913Z"
+    },
+    {
+      "id": 3,
+      "environment_key": "DEMO_TRADING",
+      "environment_name": "Demo Trading",
+      "description": "Live paper trading",
+      "is_active": 1,
+      "created_at": "2026-04-27T12:36:47.913Z",
+      "updated_at": "2026-04-27T12:36:47.913Z"
+    },
+    {
+      "id": 4,
+      "environment_key": "PRODUCTION_LIVE",
+      "environment_name": "Production Live",
+      "description": "Real money execution",
+      "is_active": 1,
+      "created_at": "2026-04-27T12:36:47.913Z",
+      "updated_at": "2026-04-27T12:36:47.913Z"
+    }
+  ],
+  "feature_flags": [
+    {
+      "id": 1,
+      "flag_key": "enable_liquidity_strategy",
+      "flag_name": "Liquidity Strategy",
+      "description": "Enables liquidity setup generation",
+      "module_name": "Strategy Engines",
+      "environment": "PRODUCTION_LIVE",
+      "is_enabled": 1,
+      "default_value": 1,
+      "current_value": 1,
+      "risk_level": "MEDIUM",
+      "requires_approval": 0,
+      "created_at": "2026-04-27T12:36:47.913Z",
+      "updated_at": "2026-04-27T12:36:47.913Z"
+    },
+    {
+      "id": 2,
+      "flag_key": "enable_channel_strategy",
+      "flag_name": "Channel Strategy",
+      "description": "Enables channel setup generation",
+      "module_name": "Strategy Engines",
+      "environment": "PRODUCTION_LIVE",
+      "is_enabled": 1,
+      "default_value": 1,
+      "current_value": 1,
+      "risk_level": "MEDIUM",
+      "requires_approval": 0,
+      "created_at": "2026-04-27T12:36:47.913Z",
+      "updated_at": "2026-04-27T12:36:47.913Z"
+    },
+    {
+      "id": 3,
+      "flag_key": "enable_live_execution",
+      "flag_name": "Live Execution",
+      "description": "Allows real money trades to be fired to MT5",
+      "module_name": "Execution Governance",
+      "environment": "PRODUCTION_LIVE",
+      "is_enabled": 0,
+      "default_value": 0,
+      "current_value": 0,
+      "risk_level": "CRITICAL",
+      "requires_approval": 1,
+      "created_at": "2026-04-27T12:36:47.913Z",
+      "updated_at": "2026-04-27T12:36:47.913Z"
+    },
+    {
+      "id": 4,
+      "flag_key": "enable_auto_mode",
+      "flag_name": "Auto Mode",
+      "description": "Allows completely automatic trade execution without assisted confirmation",
+      "module_name": "Execution Governance",
+      "environment": "PRODUCTION_LIVE",
+      "is_enabled": 0,
+      "default_value": 0,
+      "current_value": 0,
+      "risk_level": "CRITICAL",
+      "requires_approval": 1,
+      "created_at": "2026-04-27T12:36:47.913Z",
+      "updated_at": "2026-04-27T12:36:47.913Z"
+    },
+    {
+      "id": 5,
+      "flag_key": "enable_emergency_stop",
+      "flag_name": "Emergency Stop Engine",
+      "description": "Global kill switch for all strategies and new trades",
+      "module_name": "Risk Engine",
+      "environment": "PRODUCTION_LIVE",
+      "is_enabled": 1,
+      "default_value": 1,
+      "current_value": 1,
+      "risk_level": "CRITICAL",
+      "requires_approval": 1,
+      "created_at": "2026-04-27T12:36:47.913Z",
+      "updated_at": "2026-04-27T12:36:47.913Z"
+    }
+  ],
+  "runtime_configurations": [
+    {
+      "id": 1,
+      "config_key": "max_concurrent_positions",
+      "config_name": "Max Concurrent Positions",
+      "config_value": "10",
+      "data_type": "integer",
+      "module_name": "Risk Engine",
+      "environment": "PRODUCTION_LIVE",
+      "is_sensitive": 0,
+      "risk_level": "HIGH",
+      "requires_approval": 1,
+      "requires_restart": 0,
+      "updated_by": "system",
+      "created_at": "2026-04-27T12:36:47.913Z",
+      "updated_at": "2026-04-27T12:36:47.913Z"
+    },
+    {
+      "id": 2,
+      "config_key": "fixed_lot_size",
+      "config_name": "Fixed Lot Size",
+      "config_value": "0.01",
+      "data_type": "float",
+      "module_name": "Position Sizing",
+      "environment": "PRODUCTION_LIVE",
+      "is_sensitive": 0,
+      "risk_level": "HIGH",
+      "requires_approval": 1,
+      "requires_restart": 0,
+      "updated_by": "system",
+      "created_at": "2026-04-27T12:36:47.913Z",
+      "updated_at": "2026-04-27T12:36:47.913Z"
+    }
+  ],
+  "configuration_change_logs": [],
+  "configuration_approval_requests": [],
+  "compliance_documents": [
+    {
+      "id": 1,
+      "document_type": "GENERAL_RISK_DISCLOSURE",
+      "title": "General Risk Disclosure",
+      "version": "1.0",
+      "content": "Forex and CFD trading involve substantial risk. You may lose part or all trading capital. Past performance does not guarantee future results. Backtesting does not guarantee live performance. Demo performance may differ from live execution. Market conditions can change rapidly. Spreads, slippage, latency, broker execution, and news events may affect results. Cacsms ProTrader does not guarantee profit. Cacsms ProTrader is a decision-support and execution-support platform. The user remains responsible for trading decisions and account risk. Auto-trading increases operational and financial risk. The user must only trade with capital they can afford to risk.",
+      "summary": "Trading is risky and you could lose money. Cacsms ProTrader is a tool, not a guarantee.",
+      "is_active": 1,
+      "requires_reacceptance": 0,
+      "approval_status": "APPROVED",
+      "created_by": "SystemAdmin",
+      "approved_by": "SuperAdmin",
+      "effective_at": "2026-04-27T12:36:47.914Z",
+      "expires_at": null,
+      "created_at": "2026-04-27T12:36:47.914Z",
+      "updated_at": "2026-04-27T12:36:47.914Z"
+    },
+    {
+      "id": 2,
+      "document_type": "AUTO_TRADING_CONSENT",
+      "title": "Auto-Trading Consent Agreement",
+      "version": "1.0",
+      "content": "The system may place trades automatically. Trades may occur without manual confirmation. Market volatility may cause losses. MT5 connection issues may affect execution. Stop loss may fail under abnormal conditions. Slippage and gaps may occur. The user accepts responsibility for enabling automation.",
+      "summary": "Auto mode places trades without your manual click. You assume the risk of operational execution.",
+      "is_active": 1,
+      "requires_reacceptance": 0,
+      "approval_status": "APPROVED",
+      "created_by": "SystemAdmin",
+      "approved_by": "SuperAdmin",
+      "effective_at": "2026-04-27T12:36:47.914Z",
+      "expires_at": null,
+      "created_at": "2026-04-27T12:36:47.914Z",
+      "updated_at": "2026-04-27T12:36:47.914Z"
+    },
+    {
+      "id": 3,
+      "document_type": "LIVE_EXECUTION_CONSENT",
+      "title": "Live Execution Consent Agreement",
+      "version": "1.0",
+      "content": "Real money may be gained or lost. Live execution differs from demo. Broker execution is outside complete system control. User accepts responsibility for live trading. Emergency stop reduces risk but cannot guarantee prevention of loss.",
+      "summary": "You are connecting a live financial account. Errors or market conditions can cause loss of real capital.",
+      "is_active": 1,
+      "requires_reacceptance": 0,
+      "approval_status": "APPROVED",
+      "created_by": "SystemAdmin",
+      "approved_by": "SuperAdmin",
+      "effective_at": "2026-04-27T12:36:47.914Z",
+      "expires_at": null,
+      "created_at": "2026-04-27T12:36:47.914Z",
+      "updated_at": "2026-04-27T12:36:47.914Z"
+    }
+  ],
+  "compliance_acceptances": [],
+  "compliance_status_snapshots": [],
+  "compliance_reacceptance_requests": [],
+  "market_data_sources": [
+    {
+      "id": 1,
+      "source_name": "Primary MT5 Server",
+      "source_type": "MT5_TERMINAL",
+      "provider_name": "Broker A",
+      "connection_status": "CONNECTED",
+      "supported_symbols_json": "[\"EURUSD\", \"GBPUSD\", \"USDJPY\", \"XAUUSD\"]",
+      "supported_timeframes_json": "[\"M1\", \"M5\", \"M15\", \"H1\", \"H4\", \"D1\"]",
+      "last_sync_at": "2026-04-27T12:36:47.914Z",
+      "reliability_score": 99.9,
+      "is_active": 1,
+      "created_at": "2026-04-27T12:36:47.914Z",
+      "updated_at": "2026-04-27T12:36:47.914Z"
+    },
+    {
+      "id": 2,
+      "source_name": "Secondary FIX API",
+      "source_type": "FIX_API",
+      "provider_name": "Institutional LP",
+      "connection_status": "DISCONNECTED",
+      "supported_symbols_json": "[\"EURUSD\", \"GBPUSD\", \"XAUUSD\"]",
+      "supported_timeframes_json": "[\"M1\"]",
+      "last_sync_at": "2026-04-27T12:36:47.914Z",
+      "reliability_score": 98.5,
+      "is_active": 0,
+      "created_at": "2026-04-27T12:36:47.914Z",
+      "updated_at": "2026-04-27T12:36:47.914Z"
+    }
+  ],
+  "symbols": [
+    {
+      "id": 1,
+      "symbol_code": "EURUSD",
+      "display_name": "Euro vs US Dollar",
+      "asset_class": "FOREX",
+      "base_currency": "EUR",
+      "quote_currency": "USD",
+      "pip_size": 0.0001,
+      "point_size": 0.00001,
+      "tick_size": 0.00001,
+      "contract_size": 100000,
+      "digits": 5,
+      "is_active": 1,
+      "created_at": "2026-04-27T12:36:47.914Z",
+      "updated_at": "2026-04-27T12:36:47.914Z"
+    },
+    {
+      "id": 2,
+      "symbol_code": "GBPUSD",
+      "display_name": "British Pound vs US Dollar",
+      "asset_class": "FOREX",
+      "base_currency": "GBP",
+      "quote_currency": "USD",
+      "pip_size": 0.0001,
+      "point_size": 0.00001,
+      "tick_size": 0.00001,
+      "contract_size": 100000,
+      "digits": 5,
+      "is_active": 1,
+      "created_at": "2026-04-27T12:36:47.914Z",
+      "updated_at": "2026-04-27T12:36:47.914Z"
+    },
+    {
+      "id": 3,
+      "symbol_code": "XAUUSD",
+      "display_name": "Gold vs US Dollar",
+      "asset_class": "COMMODITY",
+      "base_currency": "XAU",
+      "quote_currency": "USD",
+      "pip_size": 0.1,
+      "point_size": 0.01,
+      "tick_size": 0.01,
+      "contract_size": 100,
+      "digits": 2,
+      "is_active": 1,
+      "created_at": "2026-04-27T12:36:47.914Z",
+      "updated_at": "2026-04-27T12:36:47.914Z"
+    }
+  ],
+  "market_snapshots": [
+    {
+      "id": 1,
+      "symbol_id": 1,
+      "bid": 1.08542,
+      "ask": 1.08545,
+      "spread": 3,
+      "current_session": "LONDON",
+      "latest_tick_time": "2026-04-27T12:36:47.914Z",
+      "latest_m1_candle_id": 1001,
+      "latest_h1_candle_id": 5001,
+      "latest_h8_candle_id": 8001,
+      "latest_h12_candle_id": 12001,
+      "data_health_status": "DATA_VALID",
+      "tradable_status": "TRADABLE",
+      "created_at": "2026-04-27T12:36:47.914Z",
+      "updated_at": "2026-04-27T12:36:47.914Z"
+    },
+    {
+      "id": 2,
+      "symbol_id": 2,
+      "bid": 1.2543,
+      "ask": 1.25435,
+      "spread": 5,
+      "current_session": "LONDON",
+      "latest_tick_time": "2026-04-27T12:36:47.914Z",
+      "latest_m1_candle_id": 1002,
+      "latest_h1_candle_id": 5002,
+      "latest_h8_candle_id": 8002,
+      "latest_h12_candle_id": 12002,
+      "data_health_status": "DATA_VALID",
+      "tradable_status": "TRADABLE",
+      "created_at": "2026-04-27T12:36:47.914Z",
+      "updated_at": "2026-04-27T12:36:47.914Z"
+    },
+    {
+      "id": 3,
+      "symbol_id": 3,
+      "bid": 2341.5,
+      "ask": 2341.65,
+      "spread": 15,
+      "current_session": "LONDON",
+      "latest_tick_time": "2026-04-27T12:36:47.914Z",
+      "latest_m1_candle_id": 1003,
+      "latest_h1_candle_id": 5003,
+      "latest_h8_candle_id": 8003,
+      "latest_h12_candle_id": 12003,
+      "data_health_status": "DATA_WARNING",
+      "tradable_status": "TRADABLE",
+      "created_at": "2026-04-27T12:36:47.914Z",
+      "updated_at": "2026-04-27T12:36:47.914Z"
+    }
+  ],
+  "candle_rebuild_logs": [
+    {
+      "id": 1,
+      "symbol_id": 1,
+      "timeframe": "H1",
+      "start_time": "2026-04-26T12:36:47.914Z",
+      "end_time": "2026-04-27T12:36:47.914Z",
+      "rebuild_reason": "Missing M1 data gap filled",
+      "source_used": "FIX_API",
+      "records_rebuilt": 24,
+      "records_failed": 0,
+      "triggered_by": "SystemAutoRebuild",
+      "status": "SUCCESS",
+      "created_at": "2026-04-27T12:36:47.914Z"
+    }
+  ],
+  "symbol_masters": [
+    {
+      "id": 1,
+      "symbol_code": "EURUSD",
+      "display_name": "Euro vs US Dollar",
+      "asset_class": "FOREX",
+      "base_currency": "EUR",
+      "quote_currency": "USD",
+      "profit_currency": "USD",
+      "margin_currency": "EUR",
+      "pip_size": 0.0001,
+      "point_size": 0.00001,
+      "tick_size": 0.00001,
+      "tick_value": 1,
+      "digits": 5,
+      "contract_size": 100000,
+      "min_lot": 0.01,
+      "max_lot": 100,
+      "lot_step": 0.01,
+      "typical_spread": 2,
+      "max_allowed_spread": 20,
+      "min_stop_distance": 10,
+      "freeze_level": 0,
+      "analysis_enabled": 1,
+      "trading_enabled": 1,
+      "backtesting_enabled": 1,
+      "status": "CONFIG_COMPLETE",
+      "created_at": "2026-04-27T12:36:47.914Z",
+      "updated_at": "2026-04-27T12:36:47.914Z"
+    },
+    {
+      "id": 2,
+      "symbol_code": "GBPUSD",
+      "display_name": "British Pound vs US Dollar",
+      "asset_class": "FOREX",
+      "base_currency": "GBP",
+      "quote_currency": "USD",
+      "profit_currency": "USD",
+      "margin_currency": "GBP",
+      "pip_size": 0.0001,
+      "point_size": 0.00001,
+      "tick_size": 0.00001,
+      "tick_value": 1,
+      "digits": 5,
+      "contract_size": 100000,
+      "min_lot": 0.01,
+      "max_lot": 100,
+      "lot_step": 0.01,
+      "typical_spread": 3,
+      "max_allowed_spread": 30,
+      "min_stop_distance": 15,
+      "freeze_level": 0,
+      "analysis_enabled": 1,
+      "trading_enabled": 1,
+      "backtesting_enabled": 1,
+      "status": "CONFIG_COMPLETE",
+      "created_at": "2026-04-27T12:36:47.914Z",
+      "updated_at": "2026-04-27T12:36:47.914Z"
+    },
+    {
+      "id": 3,
+      "symbol_code": "USDJPY",
+      "display_name": "US Dollar vs Japanese Yen",
+      "asset_class": "FOREX",
+      "base_currency": "USD",
+      "quote_currency": "JPY",
+      "profit_currency": "JPY",
+      "margin_currency": "USD",
+      "pip_size": 0.01,
+      "point_size": 0.001,
+      "tick_size": 0.001,
+      "tick_value": 1000,
+      "digits": 3,
+      "contract_size": 100000,
+      "min_lot": 0.01,
+      "max_lot": 100,
+      "lot_step": 0.01,
+      "typical_spread": 2.5,
+      "max_allowed_spread": 25,
+      "min_stop_distance": 10,
+      "freeze_level": 0,
+      "analysis_enabled": 1,
+      "trading_enabled": 1,
+      "backtesting_enabled": 1,
+      "status": "CONFIG_COMPLETE",
+      "created_at": "2026-04-27T12:36:47.914Z",
+      "updated_at": "2026-04-27T12:36:47.914Z"
+    },
+    {
+      "id": 4,
+      "symbol_code": "XAUUSD",
+      "display_name": "Gold vs US Dollar",
+      "asset_class": "COMMODITY",
+      "base_currency": "XAU",
+      "quote_currency": "USD",
+      "profit_currency": "USD",
+      "margin_currency": "USD",
+      "pip_size": 0.1,
+      "point_size": 0.01,
+      "tick_size": 0.01,
+      "tick_value": 1,
+      "digits": 2,
+      "contract_size": 100,
+      "min_lot": 0.01,
+      "max_lot": 50,
+      "lot_step": 0.01,
+      "typical_spread": 15,
+      "max_allowed_spread": 50,
+      "min_stop_distance": 30,
+      "freeze_level": 0,
+      "analysis_enabled": 1,
+      "trading_enabled": 1,
+      "backtesting_enabled": 1,
+      "status": "CONFIG_COMPLETE",
+      "created_at": "2026-04-27T12:36:47.914Z",
+      "updated_at": "2026-04-27T12:36:47.914Z"
+    }
+  ],
+  "asset_class_defaults": [],
+  "broker_symbol_mappings": [
+    {
+      "id": 1,
+      "broker_id": 1,
+      "broker_name": "Broker A",
+      "broker_server": "Live1",
+      "internal_symbol_id": 1,
+      "broker_symbol": "EURUSD",
+      "data_sync_enabled": 1,
+      "execution_enabled": 1,
+      "last_verified_at": "2026-04-27T12:36:47.914Z",
+      "mapping_status": "ACTIVE",
+      "created_at": "2026-04-27T12:36:47.914Z",
+      "updated_at": "2026-04-27T12:36:47.914Z"
+    }
+  ],
+  "symbol_strategy_permissions": [
+    {
+      "id": 1,
+      "symbol_id": 1,
+      "strategy_engine_id": "LIQUIDITY",
+      "analysis_enabled": 1,
+      "signal_enabled": 1,
+      "assisted_execution_enabled": 1,
+      "auto_execution_enabled": 0,
+      "backtesting_enabled": 1,
+      "minimum_setup_score": 80,
+      "max_daily_trades": 3,
+      "max_open_positions": 1,
+      "allowed_timeframes_json": "[\"H1\", \"H4\"]",
+      "allowed_sessions_json": "[\"LONDON\", \"NEW_YORK\"]",
+      "created_at": "2026-04-27T12:36:47.914Z",
+      "updated_at": "2026-04-27T12:36:47.914Z"
+    }
+  ],
+  "symbol_sessions": [
+    {
+      "id": 1,
+      "symbol_id": 1,
+      "session_name": "LONDON",
+      "start_time_utc": "08:00",
+      "end_time_utc": "16:00",
+      "broker_start_time": "10:00",
+      "broker_end_time": "18:00",
+      "is_active": 1,
+      "volatility_expectation": "HIGH",
+      "spread_expectation": "NORMAL",
+      "execution_allowed": 1,
+      "created_at": "2026-04-27T12:36:47.914Z",
+      "updated_at": "2026-04-27T12:36:47.914Z"
+    }
+  ],
+  "symbol_spread_rules": [
+    {
+      "id": 1,
+      "symbol_id": 1,
+      "session_name": "LONDON",
+      "typical_spread": 2,
+      "warning_spread": 8,
+      "max_tradable_spread": 15,
+      "news_max_spread": 50,
+      "rollover_max_spread": 100,
+      "created_at": "2026-04-27T12:36:47.914Z",
+      "updated_at": "2026-04-27T12:36:47.914Z"
+    }
+  ],
+  "symbol_news_sensitivities": [
+    {
+      "id": 1,
+      "symbol_id": 1,
+      "affected_currencies_json": "[\"EUR\", \"USD\"]",
+      "high_impact_block_minutes_before": 30,
+      "high_impact_block_minutes_after": 60,
+      "critical_block_minutes_before": 60,
+      "critical_block_minutes_after": 120,
+      "auto_trade_allowed_during_news": 0,
+      "created_at": "2026-04-27T12:36:47.914Z",
+      "updated_at": "2026-04-27T12:36:47.914Z"
+    }
+  ],
+  "symbol_validation_statuses": [
+    {
+      "id": 1,
+      "symbol_id": 1,
+      "validation_status": "VALID",
+      "missing_fields_json": "[]",
+      "last_validated_at": "2026-04-27T12:36:47.914Z",
+      "validated_by": "System",
+      "notes": "All rules passed",
+      "created_at": "2026-04-27T12:36:47.914Z",
+      "updated_at": "2026-04-27T12:36:47.914Z"
+    }
+  ],
+  "candles": [
+    {
+      "id": 1,
+      "symbol_id": 1,
+      "source_id": 1,
+      "timeframe": "M1",
+      "open_time": "2026-04-27T12:35:47.915Z",
+      "close_time": "2026-04-27T12:36:47.915Z",
+      "open_price": 1.0854,
+      "high_price": 1.08545,
+      "low_price": 1.08535,
+      "close_price": 1.08542,
+      "tick_volume": 120,
+      "real_volume": 0,
+      "spread": 3,
+      "broker_time": "2026-04-27T12:35:47.915Z",
+      "utc_time": "2026-04-27T12:35:47.915Z",
+      "candle_direction": "BULLISH",
+      "body_size": 0.00002,
+      "upper_wick_size": 0.00003,
+      "lower_wick_size": 0.00005,
+      "total_range": 0.0001,
+      "body_to_range_ratio": 0.2,
+      "upper_wick_ratio": 0.3,
+      "lower_wick_ratio": 0.5,
+      "candle_strength_score": 45,
+      "status": "CLOSED",
+      "is_synthetic": 0,
+      "is_rebuilt": 0,
+      "source_candle_ids_json": "[]",
+      "created_at": "2026-04-27T12:36:47.915Z",
+      "updated_at": "2026-04-27T12:36:47.915Z"
+    }
+  ],
+  "candle_build_jobs": [
+    {
+      "id": 1,
+      "job_type": "AGGREGATION",
+      "symbol_id": 1,
+      "timeframe": "H1",
+      "start_time": "2026-04-26T12:36:47.915Z",
+      "end_time": "2026-04-27T12:36:47.915Z",
+      "source_timeframe": "M1",
+      "status": "COMPLETED",
+      "records_processed": 1440,
+      "records_created": 24,
+      "records_updated": 0,
+      "records_failed": 0,
+      "error_message": null,
+      "started_at": "2026-04-27T12:35:47.915Z",
+      "completed_at": "2026-04-27T12:36:47.915Z",
+      "created_at": "2026-04-27T12:36:47.915Z"
+    }
+  ],
+  "candle_anomalies": [
+    {
+      "id": 1,
+      "symbol_id": 1,
+      "timeframe": "M1",
+      "candle_time": "2026-04-27T11:36:47.915Z",
+      "anomaly_type": "MISSING_SOURCE_CANDLE",
+      "severity": "HIGH",
+      "description": "Missing sequence gap detected in ticks",
+      "resolution_status": "OPEN",
+      "created_at": "2026-04-27T12:36:47.915Z",
+      "resolved_at": null
+    }
+  ],
+  "tick_ingestion_logs": [
+    {
+      "id": 1,
+      "symbol_id": 1,
+      "source_id": 1,
+      "ticks_received": 5000,
+      "ticks_valid": 4990,
+      "ticks_rejected": 10,
+      "start_time": "2026-04-26T12:36:47.915Z",
+      "end_time": "2026-04-27T12:36:47.915Z",
+      "status": "ACTIVE",
+      "created_at": "2026-04-27T12:36:47.915Z"
+    }
+  ],
+  "synthetic_candles": [
+    {
+      "id": 1,
+      "symbol_id": 1,
+      "timeframe": "H8",
+      "block_name": "London",
+      "block_sequence": 2,
+      "open_time": "2026-04-27T04:36:47.915Z",
+      "close_time": "2026-04-27T12:36:47.915Z",
+      "open_price": 1.08,
+      "high_price": 1.09,
+      "low_price": 1.075,
+      "close_price": 1.089,
+      "tick_volume": 125000,
+      "average_spread": 2.1,
+      "candle_direction": "BULLISH",
+      "body_size": 0.009,
+      "upper_wick_size": 0.001,
+      "lower_wick_size": 0.005,
+      "total_range": 0.015,
+      "body_to_range_ratio": 0.6,
+      "candle_strength_score": 85,
+      "institutional_behavior_type": "LONDON_SWEEP_ASIAN_LOW_BULLISH_EXPANSION",
+      "interpretation": "The London H8 candle swept the Asian low, rejected below the Asian range, and closed bullish above the Asian midpoint. This suggests that London may have performed a sell-side liquidity sweep followed by bullish expansion.",
+      "source_candle_ids_json": "[101,102,103,104,105,106,107,108]",
+      "source_integrity_status": "COMPLETE",
+      "status": "COMPLETE",
+      "is_rebuilt": 0,
+      "created_at": "2026-04-27T12:36:47.915Z",
+      "updated_at": "2026-04-27T12:36:47.915Z"
+    }
+  ],
+  "synthetic_candle_build_jobs": [
+    {
+      "id": 1,
+      "symbol_id": 1,
+      "timeframe": "H8",
+      "build_type": "HISTORICAL_GENERATION",
+      "start_date": "2026-03-28T12:36:47.915Z",
+      "end_date": "2026-04-27T12:36:47.915Z",
+      "status": "COMPLETED",
+      "records_created": 90,
+      "records_updated": 0,
+      "records_failed": 0,
+      "error_message": null,
+      "started_at": "2026-04-27T12:35:47.915Z",
+      "completed_at": "2026-04-27T12:36:47.915Z",
+      "created_at": "2026-04-27T12:36:47.915Z"
+    }
+  ],
+  "synthetic_candle_interpretations": [
+    {
+      "id": 1,
+      "synthetic_candle_id": 1,
+      "interpretation_type": "LONDON_BEHAVIOR",
+      "interpretation_summary": "London bullish expansion after sweeping Asian low",
+      "supporting_evidence_json": "{\"asian_low_swept\": true, \"close_above_midpoint\": true}",
+      "confidence_score": 92,
+      "created_at": "2026-04-27T12:36:47.915Z"
+    }
+  ],
+  "session_block_configurations": [
+    {
+      "id": 1,
+      "symbol_id": 1,
+      "block_type": "H8",
+      "block_name": "Asian",
+      "block_sequence": 1,
+      "start_time_utc": "00:00",
+      "end_time_utc": "08:00",
+      "broker_start_time": "02:00",
+      "broker_end_time": "10:00",
+      "timezone_rule": "EET",
+      "is_active": 1,
+      "created_at": "2026-04-27T12:36:47.915Z",
+      "updated_at": "2026-04-27T12:36:47.915Z"
+    },
+    {
+      "id": 2,
+      "symbol_id": 1,
+      "block_type": "H8",
+      "block_name": "London",
+      "block_sequence": 2,
+      "start_time_utc": "08:00",
+      "end_time_utc": "16:00",
+      "broker_start_time": "10:00",
+      "broker_end_time": "18:00",
+      "timezone_rule": "EET",
+      "is_active": 1,
+      "created_at": "2026-04-27T12:36:47.915Z",
+      "updated_at": "2026-04-27T12:36:47.915Z"
+    },
+    {
+      "id": 3,
+      "symbol_id": 1,
+      "block_type": "H8",
+      "block_name": "New York",
+      "block_sequence": 3,
+      "start_time_utc": "16:00",
+      "end_time_utc": "24:00",
+      "broker_start_time": "18:00",
+      "broker_end_time": "02:00",
+      "timezone_rule": "EET",
+      "is_active": 1,
+      "created_at": "2026-04-27T12:36:47.915Z",
+      "updated_at": "2026-04-27T12:36:47.915Z"
+    }
+  ],
+  "market_sessions": [
+    {
+      "id": 1,
+      "symbol_id": 1,
+      "session_name": "London",
+      "session_date": "2026-04-27",
+      "start_time_utc": "2026-04-27T04:36:47.915Z",
+      "end_time_utc": "2026-04-27T12:36:47.915Z",
+      "broker_start_time": "2026-04-27T04:36:47.915Z",
+      "broker_end_time": "2026-04-27T12:36:47.915Z",
+      "open_price": 1.08,
+      "high_price": 1.09,
+      "low_price": 1.078,
+      "close_price": 1.089,
+      "midpoint_price": 1.084,
+      "session_range": 0.012,
+      "body_size": 0.009,
+      "upper_wick_size": 0.001,
+      "lower_wick_size": 0.002,
+      "direction": "BULLISH",
+      "strength_score": 85,
+      "average_spread": 2.1,
+      "maximum_spread": 5,
+      "tick_volume": 125000,
+      "behavior_type": "LONDON_SWEEP_ASIAN_LOW",
+      "session_score": 92,
+      "status": "CLOSED",
+      "created_at": "2026-04-27T12:36:47.915Z",
+      "updated_at": "2026-04-27T12:36:47.915Z"
+    }
+  ],
+  "session_liquidity_levels": [
+    {
+      "id": 1,
+      "market_session_id": 1,
+      "symbol_id": 1,
+      "level_type": "SESSION_LOW",
+      "price_level": 1.078,
+      "strength_score": 80,
+      "status": "ACTIVE",
+      "created_at": "2026-04-27T12:36:47.915Z",
+      "updated_at": "2026-04-27T12:36:47.915Z"
+    }
+  ],
+  "session_behavior_events": [
+    {
+      "id": 1,
+      "market_session_id": 1,
+      "symbol_id": 1,
+      "event_type": "LIQUIDITY_SWEEP",
+      "event_time": "2026-04-27T06:36:47.915Z",
+      "event_price": 1.078,
+      "related_level_id": 1,
+      "confidence_score": 90,
+      "interpretation": "London swept Asian Low",
+      "created_at": "2026-04-27T12:36:47.915Z"
+    }
+  ],
+  "session_relationships": [
+    {
+      "id": 1,
+      "symbol_id": 1,
+      "session_date": "2026-04-27",
+      "source_session": "Asian",
+      "target_session": "London",
+      "relationship_type": "LONDON_SWEEP_ASIAN_LOW_BULLISH_EXPANSION",
+      "summary": "London swept Asian low and expanded bullish",
+      "confidence_score": 95,
+      "created_at": "2026-04-27T12:36:47.915Z"
+    }
+  ],
+  "data_quality_events": [
+    {
+      "id": 1,
+      "symbol_id": 1,
+      "timeframe": "M1",
+      "event_type": "MISSING_CANDLES",
+      "severity": "HIGH",
+      "description": "Missing sequence of M1 candles detected",
+      "affected_start_time": "2026-04-27T10:36:47.915Z",
+      "affected_end_time": "2026-04-27T11:36:47.915Z",
+      "affected_modules_json": "[\"SYNTHETIC_CANDLE_ENGINE\", \"SESSION_INTELLIGENCE\"]",
+      "trading_permission_impact": "DATA_PERMISSION_BLOCK_AUTO",
+      "resolution_status": "OPEN",
+      "created_at": "2026-04-27T12:36:47.915Z",
+      "resolved_at": null
+    }
+  ],
+  "data_health_snapshots": [
+    {
+      "id": 1,
+      "symbol_id": 1,
+      "timeframe": "M1",
+      "health_score": 82,
+      "health_status": "WARNING",
+      "tick_freshness_status": "EXCELLENT",
+      "candle_completeness_status": "DEGRADED",
+      "ohlc_validity_status": "EXCELLENT",
+      "spread_status": "NORMAL",
+      "timestamp_alignment_status": "EXCELLENT",
+      "synthetic_integrity_status": "GOOD",
+      "trading_permission": "DATA_PERMISSION_WARNING",
+      "created_at": "2026-04-27T12:36:47.915Z"
+    }
+  ],
+  "data_validation_results": [
+    {
+      "id": 1,
+      "entity_type": "CANDLE",
+      "entity_id": 1,
+      "validation_type": "OHLC_INTEGRITY",
+      "validation_status": "FAILED",
+      "error_code": "HIGH_LESS_THAN_OPEN",
+      "error_message": "High price is less than open price",
+      "severity": "CRITICAL",
+      "created_at": "2026-04-27T12:36:47.915Z"
+    }
+  ],
+  "data_recovery_logs": [
+    {
+      "id": 1,
+      "data_quality_event_id": 1,
+      "recovery_type": "MT5_HISTORY_SYNC",
+      "source_used": "MT5_TERMINAL_1",
+      "records_requested": 60,
+      "records_recovered": 60,
+      "records_failed": 0,
+      "recovery_status": "COMPLETED",
+      "notes": "Successfully recovered missing M1 candles",
+      "started_at": "2026-04-27T11:36:47.915Z",
+      "completed_at": "2026-04-27T11:38:27.915Z"
+    }
+  ],
+  "bias_states": [
+    {
+      "id": 1,
+      "symbol_id": 1,
+      "timeframe": "D1",
+      "bias_state": "BULLISH",
+      "confidence_score": 76,
+      "trade_permission": "BUY_PREFERRED",
+      "supporting_factors_json": "[\"Higher Highs\", \"Respects Discount Zone\"]",
+      "conflicting_factors_json": "[\"W1 rejection weak\"]",
+      "explanation": "Daily bias is bullish because price has continued to respect higher lows, the previous daily low remains protected, and the most recent daily candle closed above its midpoint with strong body dominance.",
+      "calculated_at": "2026-04-27T12:36:47.915Z",
+      "created_at": "2026-04-27T12:36:47.915Z"
+    },
+    {
+      "id": 2,
+      "symbol_id": 1,
+      "timeframe": "H4",
+      "bias_state": "PULLBACK",
+      "confidence_score": 64,
+      "trade_permission": "WAIT_FOR_CONFIRMATION",
+      "supporting_factors_json": "[\"Entering Discount\"]",
+      "conflicting_factors_json": "[\"Lower Highs\"]",
+      "explanation": "Tactical bias is corrective because price is pulling back against the higher timeframe bullish trend, but the protected daily higher low has not been broken.",
+      "calculated_at": "2026-04-27T12:36:47.915Z",
+      "created_at": "2026-04-27T12:36:47.915Z"
+    },
+    {
+      "id": 3,
+      "symbol_id": 1,
+      "timeframe": "M15",
+      "bias_state": "NEUTRAL",
+      "confidence_score": 46,
+      "trade_permission": "WAIT_FOR_CONFIRMATION",
+      "supporting_factors_json": "[]",
+      "conflicting_factors_json": "[\"Trapped in range\"]",
+      "explanation": "Execution bias is not ready because M15 has not yet produced bullish structure shift after the current pullback, and M5 remains trapped inside a small corrective range.",
+      "calculated_at": "2026-04-27T12:36:47.915Z",
+      "created_at": "2026-04-27T12:36:47.915Z"
+    }
+  ],
+  "bias_matrix_snapshots": [
+    {
+      "id": 1,
+      "symbol_id": 1,
+      "strategic_bias": "BULLISH",
+      "strategic_confidence": 82,
+      "tactical_bias": "PULLBACK",
+      "tactical_confidence": 66,
+      "execution_bias": "WAIT_FOR_CONFIRMATION",
+      "execution_confidence": 48,
+      "final_bias": "BULLISH",
+      "final_confidence": 65,
+      "final_permission": "BUY_PREFERRED_WAIT",
+      "bias_conflict_type": "HTF_BULLISH_LTF_BEARISH_PULLBACK",
+      "explanation": "Higher timeframe remains bullish, but lower timeframe execution confirmation is not yet present. Buy setups are preferred only after lower-timeframe bullish confirmation.",
+      "created_at": "2026-04-27T12:36:47.915Z"
+    }
+  ],
+  "bias_invalidation_events": [
+    {
+      "id": 1,
+      "symbol_id": 1,
+      "timeframe": "H1",
+      "previous_bias": "BULLISH",
+      "new_bias": "NEUTRAL",
+      "invalidation_reason": "Opposite BOS occurs with displacement",
+      "related_event_type": "STRUCTURE_SHIFT",
+      "related_event_id": 42,
+      "explanation": "H1 bullish bias invalidated due to strong bearish displacement breaking the local higher low.",
+      "created_at": "2026-04-27T11:30:07.915Z"
+    }
+  ],
+  "swing_points": [
+    {
+      "id": 1,
+      "symbol_id": 1,
+      "timeframe": "H4",
+      "swing_type": "SWING_LOW",
+      "price": 1.085,
+      "candle_id": 101,
+      "candle_time": "2026-04-26T12:36:47.915Z",
+      "strength_score": 85,
+      "is_internal": false,
+      "is_external": true,
+      "is_protected": true,
+      "is_weak": false,
+      "is_strong": true,
+      "created_liquidity": true,
+      "swept_at": null,
+      "status": "RESPECTED",
+      "created_at": "2026-04-27T12:36:47.916Z",
+      "updated_at": null
+    },
+    {
+      "id": 2,
+      "symbol_id": 1,
+      "timeframe": "H4",
+      "swing_type": "SWING_HIGH",
+      "price": 1.092,
+      "candle_id": 105,
+      "candle_time": "2026-04-27T00:36:47.916Z",
+      "strength_score": 70,
+      "is_internal": true,
+      "is_external": false,
+      "is_protected": false,
+      "is_weak": true,
+      "is_strong": false,
+      "created_liquidity": true,
+      "swept_at": null,
+      "status": "TARGET",
+      "created_at": "2026-04-27T12:36:47.916Z",
+      "updated_at": null
+    }
+  ],
+  "structure_events": [
+    {
+      "id": 1,
+      "symbol_id": 1,
+      "timeframe": "H4",
+      "event_type": "BREAK_OF_STRUCTURE",
+      "direction": "BULLISH",
+      "price_level": 1.09,
+      "candle_id": 108,
+      "event_time": "2026-04-27T06:36:47.916Z",
+      "strength_score": 88,
+      "related_swing_id": 2,
+      "validity_status": "CONFIRMED",
+      "confirmation_type": "DISPLACEMENT",
+      "explanation": "Strong bullish BOS confirmed by 40-pip displacement breaking previous weak high.",
+      "created_at": "2026-04-27T12:36:47.916Z"
+    }
+  ],
+  "structure_states": [
+    {
+      "id": 1,
+      "symbol_id": 1,
+      "timeframe": "H4",
+      "current_state": "BULLISH_STRUCTURE",
+      "current_direction": "BULLISH",
+      "protected_high": null,
+      "protected_low": 1.085,
+      "last_bos_event_id": 1,
+      "last_choch_event_id": null,
+      "confidence_score": 92,
+      "trade_permission": "BUY_PREFERRED",
+      "explanation": "H4 structure remains bullish because price has continued to protect the most recent higher low at 1.08500, the latest bullish BOS closed above the previous swing high, and the current pullback remains above the protected structural low.",
+      "updated_at": "2026-04-27T12:36:47.916Z"
+    }
+  ],
+  "structure_transitions": [
+    {
+      "id": 1,
+      "symbol_id": 1,
+      "timeframe": "H4",
+      "previous_state": "BEARISH_STRUCTURE",
+      "new_state": "BULLISH_STRUCTURE",
+      "transition_type": "REVERSAL",
+      "supporting_events_json": "[\"BULLISH_CHOCH\", \"LIQUIDITY_SWEEP\", \"BULLISH_BOS\"]",
+      "confidence_score": 85,
+      "explanation": "Full reversal confirmed: Bearish structure swept sell-side liquidity, followed by a bullish CHoCH and strong bullish BOS.",
+      "created_at": "2026-04-25T12:36:47.916Z"
+    }
+  ],
+  "dealing_ranges": [
+    {
+      "id": 1,
+      "symbol_id": 1,
+      "timeframe": "H4",
+      "range_type": "SWING_RANGE",
+      "range_high": 1.092,
+      "range_low": 1.085,
+      "equilibrium_price": 1.0885,
+      "premium_zone_start": 1.0885,
+      "discount_zone_start": 1.0885,
+      "current_price_location": "DISCOUNT",
+      "created_at": "2026-04-27T12:36:47.916Z",
+      "updated_at": "2026-04-27T12:36:47.916Z"
+    }
+  ],
+  "liquidity_pools": [
+    {
+      "id": 1,
+      "symbol_id": 1,
+      "timeframe": "H1",
+      "liquidity_type": "EQUAL_HIGH_LIQUIDITY",
+      "price_level": 1.0925,
+      "strength_score": 85,
+      "touch_count": 3,
+      "is_internal": false,
+      "is_external": true,
+      "is_active": true,
+      "created_at": "2026-04-27T12:36:47.916Z",
+      "updated_at": null
+    },
+    {
+      "id": 2,
+      "symbol_id": 1,
+      "timeframe": "M15",
+      "liquidity_type": "SESSION_LOW_LIQUIDITY",
+      "price_level": 1.0865,
+      "strength_score": 70,
+      "touch_count": 1,
+      "is_internal": true,
+      "is_external": false,
+      "is_active": true,
+      "created_at": "2026-04-27T12:36:47.916Z",
+      "updated_at": null
+    }
+  ],
+  "liquidity_events": [
+    {
+      "id": 1,
+      "symbol_id": 1,
+      "timeframe": "H1",
+      "event_type": "SELL_SIDE_SWEEP",
+      "liquidity_pool_id": null,
+      "event_price": 1.0845,
+      "event_time": "2026-04-27T11:36:47.916Z",
+      "event_strength": 90,
+      "confirmation_status": "CONFIRMED_SWEEP",
+      "post_sweep_behavior": "SWEEP_AND_REVERSAL",
+      "explanation": "Price swept sell-side liquidity below the Asian low and quickly rejected, closing bullish above the range. This indicates a potential liquidity grab followed by bullish expansion.",
+      "created_at": "2026-04-27T12:36:47.916Z"
+    }
+  ],
+  "liquidity_maps": [
+    {
+      "id": 1,
+      "symbol_id": 1,
+      "timeframe": "H1",
+      "nearest_buy_liquidity": 1.0925,
+      "nearest_sell_liquidity": 1.0865,
+      "strong_liquidity_levels_json": "[{\"price\": 1.09250, \"type\": \"EQUAL_HIGHS\"}]",
+      "weak_liquidity_levels_json": "[{\"price\": 1.08650, \"type\": \"INTERNAL_LOW\"}]",
+      "recently_swept_levels_json": "[{\"price\": 1.08450, \"time\": \"2h ago\"}]",
+      "created_at": "2026-04-27T12:36:47.916Z",
+      "updated_at": "2026-04-27T12:36:47.916Z"
+    }
+  ],
+  "inducement_events": [
+    {
+      "id": 1,
+      "symbol_id": 1,
+      "timeframe": "M15",
+      "inducement_type": "FAKE_BREAKOUT",
+      "price_level": 1.089,
+      "confirmation_status": "INDUCEMENT_CONFIRMED",
+      "explanation": "Minor bullish CHoCH formed inside discount zone, acting as inducement before sweeping the true external low.",
+      "created_at": "2026-04-27T12:36:47.916Z"
+    }
+  ],
+  "institutional_zones": [
+    {
+      "id": 1,
+      "symbol_id": 1,
+      "timeframe": "H1",
+      "zone_type": "BULLISH_FAIR_VALUE_GAP",
+      "direction": "BULLISH",
+      "zone_high": 1.0875,
+      "zone_low": 1.086,
+      "origin_candle_id": 108,
+      "related_liquidity_event_id": 1,
+      "related_structure_event_id": null,
+      "related_session_id": null,
+      "quality_score": 85,
+      "status": "ACTIVE",
+      "fill_percentage": 20,
+      "freshness_status": "PARTIALLY_MITIGATED",
+      "created_at": "2026-04-27T10:36:47.916Z",
+      "updated_at": "2026-04-27T12:36:47.916Z"
+    },
+    {
+      "id": 2,
+      "symbol_id": 1,
+      "timeframe": "H4",
+      "zone_type": "BEARISH_ORDER_BLOCK",
+      "direction": "BEARISH",
+      "zone_high": 1.094,
+      "zone_low": 1.092,
+      "origin_candle_id": 95,
+      "related_liquidity_event_id": null,
+      "related_structure_event_id": null,
+      "related_session_id": null,
+      "quality_score": 70,
+      "status": "ACTIVE",
+      "fill_percentage": 50,
+      "freshness_status": "PARTIALLY_MITIGATED",
+      "created_at": "2026-04-26T12:36:47.916Z",
+      "updated_at": "2026-04-27T12:36:47.916Z"
+    }
+  ],
+  "zone_mitigation_events": [
+    {
+      "id": 1,
+      "zone_id": 1,
+      "mitigation_type": "TAPPED",
+      "mitigation_price": 1.087,
+      "mitigation_time": "2026-04-27T11:36:47.916Z",
+      "fill_percentage": 20,
+      "reaction_score": 65,
+      "held_or_failed": "HELD",
+      "related_setup_id": null,
+      "created_at": "2026-04-27T12:36:47.916Z"
+    }
+  ],
+  "premium_discount_ranges": [
+    {
+      "id": 1,
+      "symbol_id": 1,
+      "timeframe": "H4",
+      "range_type": "SWING_RANGE",
+      "range_high": 1.095,
+      "range_low": 1.085,
+      "equilibrium_price": 1.09,
+      "premium_start": 1.09,
+      "discount_start": 1.09,
+      "current_price_location": "DISCOUNT",
+      "related_structure_id": null,
+      "related_channel_id": null,
+      "created_at": "2026-04-27T12:36:47.916Z",
+      "updated_at": null
+    }
+  ],
+  "zone_quality_scores": [
+    {
+      "id": 1,
+      "zone_id": 1,
+      "score_value": 85,
+      "score_breakdown_json": "{\"liquidity\": 20, \"displacement\": 20, \"structure\": 15, \"bias\": 15, \"location\": 10, \"freshness\": 5}",
+      "classification": "HIGH_QUALITY_ZONE",
+      "positive_factors_json": "[\"Swept Asian Low\", \"Created with displacement\", \"Discount zone\"]",
+      "negative_factors_json": "[\"Partially mitigated\"]",
+      "explanation": "A bullish fair value gap was created on H1 after London swept sell-side liquidity below the Asian low and produced strong bullish displacement. The zone remains partially unfilled, aligns with daily bullish bias, and is located in discount, making it a valid potential retracement area.",
+      "created_at": "2026-04-27T12:36:47.916Z"
+    }
+  ],
+  "opposing_zone_warnings": [
+    {
+      "id": 1,
+      "setup_id": null,
+      "symbol_id": 1,
+      "zone_id": 2,
+      "warning_type": "OPPOSING_ZONE_NEARBY",
+      "severity": "HIGH",
+      "distance_to_zone": 0.0035,
+      "recommendation": "TRADE_TARGET_RESTRICTED",
+      "explanation": "The Channel Strategy breakout buy setup is approaching a strong H4 supply zone. The setup should be downgraded or require stronger confirmation before execution.",
+      "created_at": "2026-04-27T12:36:47.916Z"
+    }
+  ],
+  "channels": [
+    {
+      "id": 1,
+      "symbol_id": 1,
+      "timeframe": "H4",
+      "channel_type": "BULLISH_CHANNEL",
+      "direction": "UPWARD_CHANNEL",
+      "slope": 0.0015,
+      "upper_boundary_line": "y = 0.0015x + 1.0900",
+      "lower_boundary_line": "y = 0.0015x + 1.0850",
+      "midline": "y = 0.0015x + 1.0875",
+      "touch_count_upper": 3,
+      "touch_count_lower": 2,
+      "strength_score": 85,
+      "status": "ACTIVE",
+      "parent_channel_id": null,
+      "explanation": "Established H4 bullish channel with clean bounces off both boundaries. Currently in discount territory.",
+      "created_at": "2026-04-25T12:36:47.916Z",
+      "updated_at": "2026-04-27T12:36:47.916Z"
+    },
+    {
+      "id": 2,
+      "symbol_id": 1,
+      "timeframe": "M15",
+      "channel_type": "CORRECTIVE_CHANNEL",
+      "direction": "DOWNWARD_CHANNEL",
+      "slope": -0.0008,
+      "upper_boundary_line": "y = -0.0008x + 1.0920",
+      "lower_boundary_line": "y = -0.0008x + 1.0890",
+      "midline": "y = -0.0008x + 1.0905",
+      "touch_count_upper": 2,
+      "touch_count_lower": 2,
+      "strength_score": 70,
+      "status": "ACTIVE",
+      "parent_channel_id": 1,
+      "explanation": "A bearish corrective channel has formed on M15 within the bullish H4 trend. Price is approaching the lower boundary for the third touch.",
+      "created_at": "2026-04-27T08:36:47.916Z",
+      "updated_at": "2026-04-27T12:36:47.916Z"
+    }
+  ],
+  "channel_touches": [
+    {
+      "id": 1,
+      "channel_id": 2,
+      "touch_type": "SECOND_TOUCH",
+      "touch_price": 1.0895,
+      "touch_time": "2026-04-27T10:36:47.916Z",
+      "rejection_strength": 78,
+      "candle_id": 88,
+      "created_at": "2026-04-27T12:36:47.916Z"
+    }
+  ],
+  "channel_breakouts": [
+    {
+      "id": 1,
+      "channel_id": 1,
+      "breakout_type": "BODY_BREAKOUT",
+      "breakout_direction": "BULLISH",
+      "breakout_price": 1.0965,
+      "breakout_time": "2026-04-26T12:36:47.916Z",
+      "confirmation_status": "CONFIRMED",
+      "strength_score": 80,
+      "created_at": "2026-04-27T12:36:47.916Z"
+    }
+  ],
+  "channel_retests": [
+    {
+      "id": 1,
+      "channel_id": 1,
+      "retest_status": "RETEST_CONFIRMED",
+      "retest_price": 1.094,
+      "retest_time": "2026-04-27T00:36:47.916Z",
+      "confirmation_strength": 85,
+      "created_at": "2026-04-27T12:36:47.916Z"
+    }
+  ],
+  "channel_lifecycle": [
+    {
+      "id": 1,
+      "channel_id": 2,
+      "previous_state": "FORMING",
+      "current_state": "ACTIVE",
+      "transition_reason": "Second confirmation touch on lower boundary.",
+      "created_at": "2026-04-27T10:36:47.916Z"
+    }
+  ],
+  "liquidity_setups": [
+    {
+      "id": 1,
+      "symbol_id": 1,
+      "timeframe": "M15",
+      "setup_type": "BUY_AFTER_SELL_SIDE_SWEEP",
+      "direction": "BULLISH",
+      "liquidity_event_id": 1,
+      "structure_event_id": 1,
+      "zone_id": 1,
+      "entry_zone_high": 1.0875,
+      "entry_zone_low": 1.086,
+      "entry_price": 1.087,
+      "stop_loss": 1.085,
+      "take_profit_targets_json": "[1.0920, 1.0950]",
+      "risk_reward_ratio": 2.5,
+      "setup_score": 92,
+      "confidence_level": "A+",
+      "status": "WAITING_CONFIRMATION",
+      "explanation": "Sell-side liquidity below the Asian low was swept during the London session, followed by a bullish CHoCH and strong displacement. Price is now retracing into a bullish fair value gap located in discount. Waiting for M5 micro CHoCH confirmation.",
+      "created_at": "2026-04-27T12:36:47.916Z",
+      "updated_at": "2026-04-27T12:36:47.916Z"
+    }
+  ],
+  "setup_lifecycle": [
+    {
+      "id": 1,
+      "setup_id": 1,
+      "previous_status": "VALIDATED",
+      "new_status": "WAITING_CONFIRMATION",
+      "transition_reason": "Zone identified, waiting for lower timeframe confirmation",
+      "created_at": "2026-04-27T12:36:47.916Z"
+    }
+  ],
+  "setup_validation_logs": [
+    {
+      "id": 1,
+      "setup_id": 1,
+      "validation_type": "LIQUIDITY_SWEEP",
+      "result": "PASS",
+      "details": "Valid sell-side sweep detected",
+      "created_at": "2026-04-27T12:36:47.916Z"
+    },
+    {
+      "id": 2,
+      "setup_id": 1,
+      "validation_type": "STRUCTURE_SHIFT",
+      "result": "PASS",
+      "details": "Bullish CHoCH confirmed with displacement",
+      "created_at": "2026-04-27T12:36:47.916Z"
+    }
+  ],
+  "channel_strategy_setups": [
+    {
+      "id": 1,
+      "strategy_version_id": null,
+      "channel_id": 1,
+      "parent_channel_id": null,
+      "child_channel_id": 2,
+      "symbol_id": 1,
+      "timeframe": "M15",
+      "setup_type": "THIRD_TOUCH_BUY",
+      "direction": "BULLISH",
+      "setup_stage": "WAITING_FOR_REJECTION",
+      "entry_zone_high": 1.0895,
+      "entry_zone_low": 1.0885,
+      "proposed_entry_price": 1.089,
+      "proposed_stop_loss": 1.087,
+      "take_profit_targets_json": "[1.0920, 1.0950]",
+      "risk_reward_ratio": 2.5,
+      "channel_strength_score": 85,
+      "touch_quality_score": 80,
+      "breakout_quality_score": null,
+      "retest_quality_score": null,
+      "bias_context_json": "{\"bias\": \"BULLISH\"}",
+      "structure_context_json": "{}",
+      "liquidity_context_json": "{}",
+      "zone_context_json": "{}",
+      "session_context_json": "{}",
+      "status": "WAITING_FOR_REJECTION",
+      "explanation": "A third-touch buy setup has formed on EURUSD M15 because price reached the lower boundary of a validated ascending channel. Waiting for bullish rejection.",
+      "created_at": "2026-04-27T12:36:47.916Z",
+      "updated_at": "2026-04-27T12:36:47.916Z"
+    }
+  ],
+  "channel_setup_lifecycle_events": [
+    {
+      "id": 1,
+      "setup_id": 1,
+      "previous_stage": "WAITING_FOR_TOUCH",
+      "new_stage": "WAITING_FOR_REJECTION",
+      "transition_reason": "Price reached lower boundary",
+      "created_at": "2026-04-27T12:36:47.916Z"
+    }
+  ],
+  "channel_setup_validation_logs": [
+    {
+      "id": 1,
+      "setup_id": 1,
+      "validation_type": "CHANNEL_TOUCH",
+      "validation_result": "PASS",
+      "details_json": "{\"touch_count\": 3}",
+      "created_at": "2026-04-27T12:36:47.916Z"
+    }
+  ]
+}
