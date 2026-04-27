@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
-import { dbMock } from '@/lib/db';
+import { sheetsClient } from '../../../../src/lib/google/sheets-client';
 
 export async function GET() {
   try {
-    const symbols = await dbMock.all('symbol_masters');
+    const symbols = await sheetsClient.getRange('Symbol_Masters!A2:Z');
     return NextResponse.json({ data: symbols });
   } catch (error) {
     return NextResponse.json({ error: 'Failed to fetch symbols' }, { status: 500 });

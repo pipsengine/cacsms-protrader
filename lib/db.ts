@@ -1540,6 +1540,9 @@ export async function saveDb(data: DatabaseStructure) {
 
 // Emulate SQLite queries
 // dbMock and all mock data usage removed. Only live data should be used henceforth.
+
+export const db = {
+  insertAuditLog: async (action: string, resource: string, resource_id: string, details: string, user: string) => {
     const db = await openDb();
     db.audit_logs.push({
       id: db.audit_logs.length + 1,
