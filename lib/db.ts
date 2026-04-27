@@ -1539,30 +1539,7 @@ export async function saveDb(data: DatabaseStructure) {
 }
 
 // Emulate SQLite queries
-export const dbMock = {
-  all: async (table: keyof DatabaseStructure) => {
-    const db = await openDb();
-    const data = db[table];
-    if (table === 'audit_logs' || table === 'system_events') {
-       return (data as any[]).sort((a,b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
-    }
-    return data;
-  },
-  getRule: async (ruleKey: string) => {
-    const db = await openDb();
-    return db.system_operating_rules.find(r => r.rule_key === ruleKey);
-  },
-  updateRule: async (ruleKey: string, value: string, isEnforced: number) => {
-    const db = await openDb();
-    const ruleIndex = db.system_operating_rules.findIndex(r => r.rule_key === ruleKey);
-    if (ruleIndex > -1) {
-      db.system_operating_rules[ruleIndex].rule_value = value;
-      db.system_operating_rules[ruleIndex].is_enforced = isEnforced;
-      db.system_operating_rules[ruleIndex].updated_at = new Date().toISOString();
-      await saveDb(db);
-    }
-  },
-  insertAudit: async (action: string, resource: string, resource_id: string, details: string, user: string) => {
+// dbMock and all mock data usage removed. Only live data should be used henceforth.
     const db = await openDb();
     db.audit_logs.push({
       id: db.audit_logs.length + 1,

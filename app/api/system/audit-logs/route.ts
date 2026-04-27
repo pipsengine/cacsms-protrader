@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server';
-import { dbMock } from '@/lib/db';
+import { sheetsClient } from '@/lib/google/sheets-client';
 
-export async function GET() {
   try {
-    const logs = await dbMock.all('audit_logs');
-    return NextResponse.json({ data: logs });
+    // Read all rows from the 'Audit_Logs' sheet
+    const rows = await sheetsClient.getRange('Audit_Logs!A2:G');
+    return NextResponse.json({ data: rows });
   } catch (error) {
     return NextResponse.json({ error: 'Failed to fetch audit logs' }, { status: 500 });
   }

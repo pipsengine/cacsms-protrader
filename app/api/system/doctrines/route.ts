@@ -1,10 +1,11 @@
 import { NextResponse } from 'next/server';
-import { dbMock } from '@/lib/db';
+import { sheetsClient } from '@/lib/google/sheets-client';
 
-export async function GET() {
   try {
-    const doctrines = await dbMock.all('system_doctrines');
-    return NextResponse.json({ data: doctrines });
+    // Read all rows from the 'System_Doctrines' sheet
+    const rows = await sheetsClient.getRange('System_Doctrines!A2:G');
+    // Optionally map to objects if needed
+    return NextResponse.json({ data: rows });
   } catch (error) {
     return NextResponse.json({ error: 'Failed to fetch doctrines' }, { status: 500 });
   }

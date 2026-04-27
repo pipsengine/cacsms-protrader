@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server';
-import { dbMock } from '@/lib/db';
+import { sheetsClient } from '@/lib/google/sheets-client';
 
-export async function GET() {
   try {
-    const sources = await dbMock.all('market_data_sources');
-    return NextResponse.json({ data: sources });
+    // Read all rows from the 'Market_Data_Sources' sheet
+    const rows = await sheetsClient.getRange('Market_Data_Sources!A2:Z');
+    return NextResponse.json({ data: rows });
   } catch (error) {
     return NextResponse.json({ error: 'Failed to fetch sources' }, { status: 500 });
   }

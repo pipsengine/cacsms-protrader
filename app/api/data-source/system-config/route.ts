@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getSheetData } from '../../../../src/services/data-source/google-sheets.service';
+import { getSystemConfig } from '../../../../src/modules/protrader/data-source/system-config.repository';
 
 export async function GET(req: NextRequest) {
   try {
-    const data = await getSheetData('System_Config', 'A1:G100');
+    const data = await getSystemConfig();
     return NextResponse.json({
       success: true,
       source: 'google_sheets',

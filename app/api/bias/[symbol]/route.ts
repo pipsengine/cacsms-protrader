@@ -1,16 +1,17 @@
 import { NextResponse } from 'next/server';
-import { dbMock } from '@/lib/db';
+import { sheetsClient } from '@/lib/google/sheets-client';
 
-export async function GET(request: Request, { params }: { params: Promise<{ symbol: string }> }) {
   try {
     const { symbol } = await params;
-    const symbols = await dbMock.all('symbol_masters');
-    const symbolObj = symbols.find((s: any) => s.symbol_code === symbol);
+    // Fetch all symbols from Google Sheets
+    const symbolRows = await sheetsClient.getRange('Asset!A2:K');
+    const symbolObj = symbolRows.find((row: any[]) => row[0] === symbol || row[1] === symbol);
     if (!symbolObj) return NextResponse.json({ error: 'Symbol not found' }, { status: 404 });
 
-    const biasStates = await dbMock.all('bias_states');
-    const filtered = biasStates.filter((b: any) => b.symbol_id === symbolObj.id);
-    
+    // Fetch all bias states from Google Sheets (assuming a Bias_States sheet exists)
+    const biasRows = await sheetsClient.getRange('Bias_States!A2:Z');
+    // Filter for this symbol (assuming symbol_id is in column 0 or 1, adjust as needed)
+    const filtered = biasRows.filter((b: any[]) => b[0] === symbolObj[0] || b[1] === symbolObj[0]);
     return NextResponse.json({ data: filtered });
   } catch (error) {
     return NextResponse.json({ error: 'Failed to fetch bias states' }, { status: 500 });
