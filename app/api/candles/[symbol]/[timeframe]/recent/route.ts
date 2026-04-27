@@ -1,0 +1,29 @@
+import { NextResponse } from 'next/server';
+import { dbMock } from '@/lib/db';
+
+export async function GET(request: Request, { params }: { params: Promise<{ symbol: string, timeframe: string }> }) {
+  try {
+    const { symbol, timeframe } = await params;
+    
+    // Parse search params for limit
+    const url = new URL(request.url);
+    const limitParams = url.searchParams.get('limit');
+    let limit = 100;
+    if (limitParams) {
+       limit = parseInt(limitParams);
+       if (isNaN(limit)) limit = 100;
+    }
+
+    const allCandles = await dbMock.all('candles');
+    const symbols = await dbMock.all('symbol_masters');
+    const symbolObj = symbols.find((s: any) => s.symbol_code === symbol);
+    if (!symbolObj) return NextResponse.json({ error: 'Symbol not found' }, { status: 404 });
+
+    const filtered = allCandles.filter((c: any) => c.symbol_id === symbolObj.id && c.timeframe === timeframe && c.status === 'CLOSED');
+    const sorted = filtered.sort((a: any, b: any) => new Date(b.close_time).getTime() - new Date(a.close_time).getTime());
+    
+    return NextResponse.json({ data: sorted.slice(0, limit) });
+  } catch (error) {
+    return NextResponse.json({ error: 'Failed to fetch recent candles' }, { status: 500 });
+  }
+}
