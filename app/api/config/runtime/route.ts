@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server';
-import { dbMock } from '@/lib/db';
+import { sheetsClient } from '@/lib/google/sheets-client';
 
-export async function GET() {
   try {
-    const configs = await dbMock.all('runtime_configurations');
-    return NextResponse.json({ data: configs });
+    // Read all rows from the 'Runtime_Configurations' sheet
+    const rows = await sheetsClient.getRange('Runtime_Configurations!A2:N');
+    return NextResponse.json({ data: rows });
   } catch (error) {
     return NextResponse.json({ error: 'Failed to fetch configs' }, { status: 500 });
   }

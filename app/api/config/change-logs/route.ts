@@ -1,12 +1,11 @@
 import { NextResponse } from 'next/server';
-import { dbMock } from '@/lib/db';
+import { sheetsClient } from '@/lib/google/sheets-client';
 
-export async function GET() {
   try {
-    const logs = await dbMock.all('configuration_change_logs');
-    // sort by created_at desc
-    const sorted = [...logs].sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
-    return NextResponse.json({ data: sorted });
+    // Read all rows from the 'Configuration_Change_Logs' sheet
+    const rows = await sheetsClient.getRange('Configuration_Change_Logs!A2:J');
+    // Optionally sort by created_at descending if needed
+    return NextResponse.json({ data: rows });
   } catch (error) {
     return NextResponse.json({ error: 'Failed to fetch logs' }, { status: 500 });
   }

@@ -1,18 +1,23 @@
 import { NextResponse } from 'next/server';
-import { dbMock } from '@/lib/db';
+import { sheetsClient } from '@/lib/google/sheets-client';
 
-export async function GET(request: Request, { params }: { params: Promise<{ symbol: string, timeframe: string }> }) {
   try {
     const { symbol, timeframe } = await params;
-    const allCandles = await dbMock.all('candles');
-    // Assuming symbol parameter is symbol_code, we need to map to symbol_id, but here let's just mock filtering or map symbol code
-    const symbols = await dbMock.all('symbol_masters');
-    const symbolObj = symbols.find((s: any) => s.symbol_code === symbol);
+    // Read all rows from the 'Candles' and 'Symbol_Masters' sheets
+    const [candlesRows, symbolsRows] = await Promise.all([
+      sheetsClient.getRange('Candles!A2:Z'),
+      sheetsClient.getRange('Symbol_Masters!A2:Z')
+    ]);
+    // Assume headers: id, symbol_id, timeframe, ...
+    const symbolHeader = ['id','symbol_code','symbol_name','...'];
+    const symbolObj = symbolsRows.map(row => Object.fromEntries(symbolHeader.map((k, i) => [k, row[i]]))).find(s => s.symbol_code === symbol);
     if (!symbolObj) return NextResponse.json({ error: 'Symbol not found' }, { status: 404 });
-
     const symbolId = symbolObj.id;
-    const filtered = allCandles.filter((c: any) => c.symbol_id === symbolId && c.timeframe === timeframe);
-    
+    // Assume candleHeader: id, symbol_id, timeframe, ...
+    const candleHeader = ['id','symbol_id','timeframe','...'];
+    const filtered = candlesRows
+      .map(row => Object.fromEntries(candleHeader.map((k, i) => [k, row[i]])))
+      .filter(c => c.symbol_id === symbolId && c.timeframe === timeframe);
     return NextResponse.json({ data: filtered });
   } catch (error) {
     return NextResponse.json({ error: 'Failed to fetch candles' }, { status: 500 });

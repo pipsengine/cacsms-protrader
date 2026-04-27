@@ -1,27 +1,29 @@
 import { NextResponse } from 'next/server';
-import { dbMock } from '@/lib/db';
+import { sheetsClient } from '@/lib/google/sheets-client';
 
-export async function POST(req: Request) {
   try {
     const body = await req.json();
-    
     // Validate required fields
     if (!body.event_type || !body.source_module || !body.payload_json) {
-        return NextResponse.json({ error: 'Missing required event fields' }, { status: 400 });
+      return NextResponse.json({ error: 'Missing required event fields' }, { status: 400 });
     }
-
-    const event = await dbMock.insertEvent({
-        event_type: body.event_type,
-        source_module: body.source_module,
-        entity_type: body.entity_type || null,
-        entity_id: body.entity_id || null,
-        account_id: body.account_id || null,
-        strategy_engine_id: body.strategy_engine_id || null,
-        symbol_id: body.symbol_id || null,
-        payload_json: typeof body.payload_json === 'string' ? body.payload_json : JSON.stringify(body.payload_json)
-    });
-
-    return NextResponse.json({ message: 'Event published', data: event }, { status: 201 });
+    // Prepare event row for Google Sheets
+    const eventRow = [
+      '', // id (auto-increment or left blank for Google Sheets)
+      body.event_type,
+      body.source_module,
+      body.entity_type || '',
+      body.entity_id || '',
+      body.account_id || '',
+      body.strategy_engine_id || '',
+      body.symbol_id || '',
+      typeof body.payload_json === 'string' ? body.payload_json : JSON.stringify(body.payload_json),
+      'PENDING',
+      new Date().toISOString(),
+      '', // processed_at
+    ];
+    await sheetsClient.appendRows('System_Events!A2:M', [eventRow]);
+    return NextResponse.json({ message: 'Event published', data: eventRow }, { status: 201 });
   } catch (error) {
     console.error('Failed to publish event:', error);
     return NextResponse.json({ error: 'Failed to publish event' }, { status: 500 });

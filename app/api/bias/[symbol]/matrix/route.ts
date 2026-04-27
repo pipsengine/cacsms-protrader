@@ -1,17 +1,20 @@
 import { NextResponse } from 'next/server';
-import { dbMock } from '@/lib/db';
+import { sheetsClient } from '@/src/lib/google/sheets-client';
 
 export async function GET(request: Request, { params }: { params: Promise<{ symbol: string }> }) {
   try {
     const { symbol } = await params;
-    const symbols = await dbMock.all('symbol_masters');
+    const symbolsRaw = await sheetsClient.getRange('symbol_masters');
+    const [header, ...rows] = symbolsRaw;
+    const symbols = rows.map(row => Object.fromEntries(header.map((k, i) => [k, row[i]])));
     const symbolObj = symbols.find((s: any) => s.symbol_code === symbol);
     if (!symbolObj) return NextResponse.json({ error: 'Symbol not found' }, { status: 404 });
 
-    const matrixes = await dbMock.all('bias_matrix_snapshots');
+    const matrixesRaw = await sheetsClient.getRange('bias_matrix_snapshots');
+    const [matHeader, ...matRows] = matrixesRaw;
+    const matrixes = matRows.map(row => Object.fromEntries(matHeader.map((k, i) => [k, row[i]])));
     const filtered = matrixes.filter((b: any) => b.symbol_id === symbolObj.id);
     const latest = filtered.sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())[0];
-    
     return NextResponse.json({ data: latest || null });
   } catch (error) {
     return NextResponse.json({ error: 'Failed to fetch bias matrix' }, { status: 500 });

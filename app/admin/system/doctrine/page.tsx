@@ -35,10 +35,38 @@ export default function DoctrinePage() {
   const [doctrines, setDoctrines] = useState<Doctrine[]>([]);
   const [rules, setRules] = useState<OperatingRule[]>([]);
   const [logs, setLogs] = useState<AuditLog[]>([]);
-  
   const [editingRule, setEditingRule] = useState<OperatingRule | null>(null);
   const [editValue, setEditValue] = useState('');
   const [loading, setLoading] = useState(true);
+  // TODO: Replace with real authentication/authorization
+  const isAdmin = true;
+
+  // Map Google Sheets rows to objects using known headers
+  const mapDoctrineRows = (rows: any[][]): Doctrine[] => rows.map(row => ({
+    id: Number(row[0]),
+    doctrine_key: row[1],
+    doctrine_name: row[2],
+    description: row[3],
+    is_active: Number(row[4]),
+  }));
+  const mapRuleRows = (rows: any[][]): OperatingRule[] => rows.map(row => ({
+    id: Number(row[0]),
+    rule_key: row[1],
+    rule_name: row[2],
+    rule_value: row[3],
+    rule_type: row[4],
+    description: row[5],
+    is_enforced: Number(row[6]),
+  }));
+  const mapAuditRows = (rows: any[][]): AuditLog[] => rows.map(row => ({
+    id: Number(row[0]),
+    action: row[1],
+    resource: row[2],
+    resource_id: row[3],
+    details: row[4],
+    user: row[5],
+    created_at: row[6],
+  }));
 
   const fetchData = async () => {
     setLoading(true);
@@ -48,9 +76,9 @@ export default function DoctrinePage() {
         fetch('/api/system/operating-rules').then(res => res.json()),
         fetch('/api/system/audit-logs').then(res => res.json()),
       ]);
-      setDoctrines(resDocs.data || []);
-      setRules(resRules.data || []);
-      setLogs(resLogs.data || []);
+      setDoctrines(mapDoctrineRows(resDocs.data || []));
+      setRules(mapRuleRows(resRules.data || []));
+      setLogs(mapAuditRows(resLogs.data || []));
     } catch (e) {
       console.error(e);
     } finally {
@@ -149,12 +177,14 @@ export default function DoctrinePage() {
                       </div>
                     </td>
                     <td className="py-3 px-4 text-right">
-                      <button 
-                        onClick={() => { setEditingRule(rule); setEditValue(rule.rule_value); }}
-                        className="p-1.5 text-slate-400 hover:text-white bg-[#222] hover:bg-[#333] rounded transition-colors"
-                      >
-                        <Edit2 className="w-4 h-4" />
-                      </button>
+                      {isAdmin && (
+                        <button 
+                          onClick={() => { setEditingRule(rule); setEditValue(rule.rule_value); }}
+                          className="p-1.5 text-slate-400 hover:text-white bg-[#222] hover:bg-[#333] rounded transition-colors"
+                        >
+                          <Edit2 className="w-4 h-4" />
+                        </button>
+                      )}
                     </td>
                   </tr>
                 ))}

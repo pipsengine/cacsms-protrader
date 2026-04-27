@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server';
-import { dbMock } from '@/lib/db';
+import { sheetsClient } from '@/lib/google/sheets-client';
 
-export async function GET() {
   try {
-    const events = await dbMock.all('system_events');
-    return NextResponse.json({ data: events });
+    // Read all rows from the 'System_Events' sheet
+    const rows = await sheetsClient.getRange('System_Events!A2:M');
+    return NextResponse.json({ data: rows });
   } catch (error) {
     return NextResponse.json({ error: 'Failed to fetch events' }, { status: 500 });
   }

@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server';
-import { dbMock } from '@/lib/db';
+import { sheetsClient } from '@/lib/google/sheets-client';
 
-export async function GET() {
   try {
-    const flags = await dbMock.all('feature_flags');
-    return NextResponse.json({ data: flags });
+    // Read all rows from the 'Feature_Flags' sheet
+    const rows = await sheetsClient.getRange('Feature_Flags!A2:N');
+    return NextResponse.json({ data: rows });
   } catch (error) {
     return NextResponse.json({ error: 'Failed to fetch feature flags' }, { status: 500 });
   }

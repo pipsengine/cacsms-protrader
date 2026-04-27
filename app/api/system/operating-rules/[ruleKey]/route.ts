@@ -33,7 +33,17 @@ import { sheetsClient } from '@/lib/google/sheets-client';
     const updateRange = `System_Operating_Rules!A${ruleIdx + 2}:H${ruleIdx + 2}`;
     const updatedRow = [rule[0], rule[1], rule[2], valueToUpdate, rule[4], rule[5], isEnforcedToUpdate, new Date().toISOString()];
     await sheetsClient.updateRange(updateRange, [updatedRow]);
-    // TODO: Add audit log entry for critical rules
+    // Append audit log entry to Google Sheets
+    const auditLogRow = [
+      '', // id (auto-increment or left blank for Google Sheets)
+      'UPDATE_OPERATING_RULE',
+      'system_operating_rules',
+      ruleKey,
+      `Rule updated to value: ${valueToUpdate}, is_enforced: ${isEnforcedToUpdate}`,
+      'SuperAdmin', // Replace with actual user if available
+      new Date().toISOString()
+    ];
+    await sheetsClient.appendRows('Audit_Logs!A2:G', [auditLogRow]);
     return NextResponse.json({ message: 'Rule updated', data: updatedRow });
   } catch (error) {
     return NextResponse.json({ error: 'Failed to update operating rule' }, { status: 500 });
