@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { sheetsClient } from '@/lib/google/sheets-client';
 
+export async function GET() {
   try {
     // Read all rows from the 'Audit_Logs' sheet
     const rows = await sheetsClient.getRange('Audit_Logs!A2:G');

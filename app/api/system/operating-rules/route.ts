@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { sheetsClient } from '@/lib/google/sheets-client';
 
+export async function GET() {
   try {
     // Read all rows from the 'System_Operating_Rules' sheet
     const rows = await sheetsClient.getRange('System_Operating_Rules!A2:H');
