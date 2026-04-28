@@ -12,7 +12,15 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
     db.compliance_documents[docIndex].approval_status = 'APPROVED';
     db.compliance_documents[docIndex].approved_by = 'SuperAdmin';
     db.compliance_documents[docIndex].updated_at = new Date().toISOString();
-    
+    db.audit_logs.push({
+      id: Date.now() + Math.random(),
+      action: 'COMPLIANCE_DOCUMENT_APPROVED',
+      resource: 'compliance_documents',
+      resource_id: String(db.compliance_documents[docIndex].id),
+      details: JSON.stringify(db.compliance_documents[docIndex]),
+      user: 'SuperAdmin',
+      created_at: new Date().toISOString()
+    });
     await saveDb(db);
     return NextResponse.json({ data: db.compliance_documents[docIndex] });
   } catch (error) {

@@ -31,6 +31,15 @@ export async function POST(request: Request) {
               is_current: 1,
               created_at: new Date().toISOString()
            });
+           db.audit_logs.push({
+              id: Date.now() + Math.random(),
+              action: 'COMPLIANCE_ACCEPTED',
+              resource: 'compliance_acceptances',
+              resource_id: String(doc.id),
+              details: JSON.stringify({ user_id: userId, document_id: doc.id, document_type: doc.document_type, document_version: doc.version }),
+              user: userId,
+              created_at: new Date().toISOString()
+           });
        }
     }
     

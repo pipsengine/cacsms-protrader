@@ -32,6 +32,15 @@ export async function POST(request: Request) {
       updated_at: new Date().toISOString()
     };
     db.compliance_documents.push(newDoc as any);
+    db.audit_logs.push({
+      id: Date.now() + Math.random(),
+      action: 'COMPLIANCE_DOCUMENT_CREATED',
+      resource: 'compliance_documents',
+      resource_id: String(newDoc.id),
+      details: JSON.stringify(newDoc),
+      user: 'SystemAdmin',
+      created_at: new Date().toISOString()
+    });
     await saveDb(db);
     return NextResponse.json({ data: newDoc });
   } catch (error) {
